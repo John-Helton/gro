@@ -9,6 +9,7 @@ function HomePage() {
     <div>
       <HomeHeader />
       <FeaturedDestinations />
+      
       <Testimonials />
       {/* Otros componentes de la página de inicio */}
     </div>

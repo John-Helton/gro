@@ -1,0 +1,21 @@
+/* HomeHeader.module.css */
+.background-image {
+    background-image: url('../../../public/fondo.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .navbar-brand {
+    font-size: 24px; /* Cambia el tamaño del texto según tus preferencias */
+    color: white;    /* Cambia el color del texto a blanco */
+  }
+  
+  .nav-link {
+    font-size: 18px; /* Cambia el tamaño del texto según tus preferencias */
+    color: white;    /* Cambia el color del texto a blanco */
+  }
+  
+  
