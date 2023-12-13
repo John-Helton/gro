@@ -2,16 +2,17 @@
 import React from 'react';
 import HomeHeader from '../components/home/HomeHeader';
 import FeaturedDestinations from '../components/home/FeaturedDestinations';
-import Testimonials from '../components/common/Testimonials';
+import PopularDestination from '../components/home/PopularDestination';
+import PopularTours from '../components/home/PopularTours';
 
 function HomePage() {
   return (
     <div>
       <HomeHeader />
       <FeaturedDestinations />
-      
-      <Testimonials />
-      {/* Otros componentes de la página de inicio */}
+      <PopularDestination />
+      <PopularTours />
+    
     </div>
   );
 }
