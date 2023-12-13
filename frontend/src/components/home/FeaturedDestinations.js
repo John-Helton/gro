@@ -18,14 +18,7 @@ function FeaturedDestinations() {
     setMaxPrice(event.target.value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
 
-    // Aquí puedes realizar la lógica de búsqueda con los valores seleccionados
-    console.log('Destino:', destination);
-    console.log('Duración:', duration);
-    console.log('Precio Máximo:', maxPrice);
-  };
 
   return (
     <div className="container mt-5 d-flex justify-content-center" style={{ height: '15vh' }}>
