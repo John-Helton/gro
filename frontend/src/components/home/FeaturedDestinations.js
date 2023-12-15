@@ -1,5 +1,4 @@
-import React, { useState } from 'react'; // Asegúrate de importar los estilos de Bootstrap
-import './HomeHeader.module.css';
+import React, { useState } from 'react';
 
 function FeaturedDestinations() {
   const [destination, setDestination] = useState('');
@@ -18,12 +17,10 @@ function FeaturedDestinations() {
     setMaxPrice(event.target.value);
   };
 
-
-
   return (
-    <div className="container mt-5 d-flex justify-content-center" style={{ height: '15vh' }}>
-      <form className="search-tour d-flex flex-row justify-content-around w-75 p-4" style={{ background: '#f8f9fa', border: '1px solid #dee2e6', borderRadius: '10px' }}>
-        <div className="form-group">
+    <div className="container mt-5">
+      <form className="search-tour row justify-content-center p-4" style={{ background: '#f8f9fa', border: '1px solid #dee2e6', borderRadius: '10px' }}>
+        <div className="col-md-3 form-group">
           <label htmlFor="destination">Selecciona un destino</label>
           <select
             id="destination"
@@ -38,7 +35,7 @@ function FeaturedDestinations() {
           </select>
         </div>
 
-        <div className="form-group">
+        <div className="col-md-3 form-group">
           <label htmlFor="duration">Selecciona una duración</label>
           <select
             id="duration"
@@ -53,7 +50,7 @@ function FeaturedDestinations() {
           </select>
         </div>
 
-        <div className="form-group">
+        <div className="col-md-3 form-group">
           <label htmlFor="price">Precio máximo</label>
           <div className="price-input">
             <input
@@ -70,8 +67,8 @@ function FeaturedDestinations() {
           </div>
         </div>
 
-        <div className="form-group">
-          <button type="submit" className="btn btn-primary">
+        <div className="col-md-3 form-group">
+          <button type="submit" className="btn btn-primary w-100">
             Buscar
           </button>
         </div>
