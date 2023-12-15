@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import { getAllDestinations } from '../../services/TursServices';
 
 export default function PopularDestination() {
-    const destinations = [
-        { name: 'Quito', tours: 10, images: ['/static/quito.jpg', '/static/quito2.jpg'] },
-        { name: 'Guayaquil', tours: 8, images: ['/static/quito.jpg', '/static/quito2.jpg'] },
-        { name: 'Cuenca', tours: 6, images: ['/static/quito.jpg', '/static/quito2.jpg'] },
-        { name: 'Galápagos', tours: 12, images: ['/static/quito.jpg', '/static/quito2.jpg'] },
-        { name: 'Baños', tours: 12, images: ['/static/quito.jpg', '/static/quito2.jpg'] },
-        { name: 'Perdenales', tours: 12, images: ['/static/quito.jpg', '/static/quito2.jpg'] },
-    ];
-
+    const [destinations, setDestinations] = useState([]);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+    useEffect(() => {
+        const fetchDestinations = async () => {
+            const data = await getAllDestinations();
+            setDestinations(data);
+        };
+
+        fetchDestinations();
+    }, []);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -20,11 +22,14 @@ export default function PopularDestination() {
         return () => clearInterval(interval);
     }, []);
 
+    // Ordenar los destinos por la cantidad de tours de manera descendente
+    const sortedDestinations = [...destinations].sort((a, b) => b.tours - a.tours);
+
     return (
         <div className='container mt-5'>
             <h2 className='text-uppercase text-center'>Destinos Populares en Ecuador</h2>
             <div className='row'>
-                {destinations.map((destination) => (
+                {sortedDestinations.map((destination) => (
                     <div key={destination.name} className='col-md-6 col-lg-4 mb-4'>
                         <div className='card'>
                             <div
