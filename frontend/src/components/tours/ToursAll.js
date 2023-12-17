@@ -2,43 +2,35 @@ import React, { useState, useEffect } from "react";
 import RatingStars from "react-rating-stars-component";
 import { getAllTours } from "../../services/TursServices";
 import { Link } from "react-router-dom";
+ // Ajusta la ruta según tu estructura
 
-export default function PopularTours() {
+export default function ToursAll() {
   const [tours, setTours] = useState([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const toursData = await getAllTours();
-
-      // Ordenar tours por estrellas de manera descendente
-      const sortedTours = toursData.sort((a, b) => b.rating - a.rating);
-
-      // Tomar solo los 3 tours más populares
-      const popularTours = sortedTours.slice(0, 3);
-
-      setTours(popularTours);
-    };
-
-    fetchData();
-  }, []);
-
-  const handleInterval = () => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % 1);
     }, 4000);
 
     return () => clearInterval(interval);
-  };
+  }, []);
 
-  useEffect(handleInterval, []); // Llamada a useEffect solo una vez al montar el componente
+  useEffect(() => {
+    const fetchData = async () => {
+      const toursData = await getAllTours();
+      setTours(toursData);
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="container mt-5">
-      <h2 className="text-center">LOS TOURS MÁS POPULARES</h2>
+      <h2 className="text-center">BUSCA TU TOUR IDEAL</h2>
       <div className="row">
         {tours.map((tour) => (
-          <div key={tour.name} className="col-md-6 col-lg-4 mb-4">
+          <div key={tour.id} className="col-md-6 col-lg-4 mb-4">
             <Link to={`/tours/${tour.id}`} key={tour.id}>
               <div className="card">
                 <div
@@ -100,18 +92,13 @@ export default function PopularTours() {
                       activeColor="#ffd700"
                     />
                   </div>
-                  <p className="card-text">Duración: {tour.days} días</p>
-                  <p className="card-text">Guía: {tour.guide}</p>
+                  <p className="card-text">Duracion: {tour.days} days</p>
+                  <p className="card-text">Guia: {tour.guide}</p>
                 </div>
               </div>
             </Link>
           </div>
         ))}
-      </div>
-      <div className="text-center">
-        <Link to="/tour">
-          <button className="btn btn-primary">Ver más</button>
-        </Link>
       </div>
     </div>
   );
