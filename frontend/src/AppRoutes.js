@@ -10,11 +10,7 @@ import ToursPage from "./pages/Tours/ToursPage";
 import ToursAllPage from "./pages/Tours/ToursAllPage";
 import PopularDestination from "./components/home/PopularDestination";
 import ContactPage from './pages/Contact/ContactPage';
-/*
 
-import DestinationPage from './pages/DestinationPage';
-import TourPage from './pages/TourPage';
-*/
 
 export default function AppRoutes() {
   return (
