@@ -9,17 +9,18 @@ import DestinationPage from "./pages/Destination/DestinationPage";
 import ToursPage from "./pages/Tours/ToursPage";
 import ToursAllPage from "./pages/Tours/ToursAllPage";
 import PopularDestination from "./components/home/PopularDestination";
+import ContactPage from './pages/Contact/ContactPage';
 /*
 
 import DestinationPage from './pages/DestinationPage';
 import TourPage from './pages/TourPage';
-import ContactPage from './pages/ContactPage';*/
+*/
 
 export default function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      {/* <Route path="/contact" element={<ContactPage />} /> */}
+      {<Route path="/contact" element={<ContactPage />} /> }
       <Route path="/destination" element={<PopularDestination />} />
       <Route path="/destination/:id" element={<DestinationPage />} />
       <Route path="/tour" element={<ToursAllPage />} />
