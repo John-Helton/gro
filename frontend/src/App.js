@@ -9,7 +9,7 @@ function App() {
       <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       <div style={{ flex: 1 }}>
         <NavBar />
-        <AppRoutes />
+        <AppRoutes/>
       </div>
       <Footer />
     </div>
