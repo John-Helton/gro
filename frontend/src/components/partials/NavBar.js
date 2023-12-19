@@ -5,6 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 
 function NavBar() {
     const [navbarColor, setNavbarColor] = useState("transparent");
+    const [userName, setUserName] = useState(""); // Estado para almacenar el nombre del usuario
     const location = useLocation();
 
     useEffect(() => {
@@ -25,8 +26,13 @@ function NavBar() {
         };
     }, [location.pathname]);
 
-    const isLoggedIn = false; // Cambiar a false si el usuario no está logeado
-    const userName = "John Doe"; // Cambiar por el nombre del usuario logeado
+    const handleLogout = () => {
+        // Aquí deberías manejar la lógica de cierre de sesión
+        // Puedes reiniciar el estado del nombre del usuario al cerrar sesión
+        setUserName("");
+    };
+
+    const isLoggedIn = !!userName; // Se considera logeado si hay un nombre de usuario
 
     return (
         <Navbar bg={navbarColor} expand="lg" variant="light" fixed="top" style={{ borderBottom: "1px solid black" }}>
@@ -52,7 +58,12 @@ function NavBar() {
                     </Nav>
                     <Nav>
                         {isLoggedIn ? (
-                            <Nav.Link style={{ color: "black", fontWeight: "bold" }}>{userName}</Nav.Link>
+                            <>
+                                <Nav.Link style={{ color: "black", fontWeight: "bold" }}>{userName}</Nav.Link>
+                                <Nav.Link onClick={handleLogout} style={{ color: "black", fontWeight: "bolder" }}>
+                                    Logout
+                                </Nav.Link>
+                            </>
                         ) : (
                             <Nav.Link as={Link} to="/login" style={{ color: "black", fontWeight: "bolder" }}>
                                 LOGIN
