@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function ToursAll() {
   const [tours, setTours] = useState([]);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -13,7 +13,7 @@ export default function ToursAll() {
     }, 4000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [ setCurrentImageIndex ]);
 
   useEffect(() => {
     const fetchData = async () => {

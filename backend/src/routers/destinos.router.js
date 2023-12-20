@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { TripModel } from "../interfaces/trip.model.js";
 import handler from "express-async-handler";
 import admin from "../middleware/admin.mid.js";
 import { DestinoModel } from "../interfaces/destinos.model.js";
@@ -30,6 +29,18 @@ router.delete(
     res.send({
       message: "tours eliminados correctamente",
     });
+  })
+);
+
+router.put(
+  "/:destinoId",
+  admin,
+  handler(async (req, res) => {
+    const updateDestino = req.body;
+    const destinoId = req.params.destinoId;
+    const result = await DestinoModel.findByIdAndUpdate(destinoId, updateDestino, { new: true });
+    res.send(result);
+    console.log("Actualizado correctamente");
   })
 );
 router.delete(

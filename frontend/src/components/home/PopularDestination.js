@@ -5,6 +5,15 @@ import { Link } from 'react-router-dom';
 export default function PopularDestination() {
   const [destinations, setDestinations] = useState([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  useEffect(() => {
+    const handleInterval = () => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % 1);
+    };
+
+    const interval = setInterval(handleInterval, 4000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,7 +32,7 @@ export default function PopularDestination() {
     };
 
     fetchData(); // Llamada a fetchData solo una vez al montar el componente
-  }, []); // Dependencias vacías para asegurar que solo se ejecute una vez
+  }, [setCurrentImageIndex]); // Dependencias vacías para asegurar que solo se ejecute una vez
 
   useEffect(() => {
     const interval = setInterval(() => {

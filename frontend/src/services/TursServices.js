@@ -1,4 +1,3 @@
-import { toursData } from "./data";
 import axios from "axios";
 
 export const getAllTours = async () => {

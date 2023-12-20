@@ -9,6 +9,7 @@ import DestinationPage from "./pages/Destination/DestinationPage";
 import ToursPage from "./pages/Tours/ToursPage";
 import ToursAllPage from "./pages/Tours/ToursAllPage";
 import PopularDestination from "./components/home/PopularDestination";
+import Dashboard from "./pages/admin/dashboard";
 /*
 
 import DestinationPage from './pages/DestinationPage';
@@ -26,6 +27,7 @@ export default function AppRoutes() {
       <Route path="/tours/:id" element={<ToursPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/dashboard/*" element={<Dashboard />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
