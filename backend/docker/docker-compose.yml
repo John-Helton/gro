@@ -1,11 +1,11 @@
 version: '3'
 
 services:
-  group-travel:
+  projecttravel:
     build:
       context: ..
       dockerfile: docker/dockerfile
-    container_name: group-travel
+    container_name: project-travel
     ports:
       - "8081:5000"
     env_file:
