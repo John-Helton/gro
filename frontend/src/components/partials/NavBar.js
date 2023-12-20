@@ -108,6 +108,8 @@ function NavBar() {
               <>
                 <Nav.Item>
                   <Nav.Link
+                  as={Link}
+                  to="/dashboard"
                     style={{
                       color: "black",
                       fontWeight: "bold",

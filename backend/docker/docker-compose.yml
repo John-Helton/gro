@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  group-travel:
+    build:
+      context: ..
+      dockerfile: docker/dockerfile
+    container_name: group-travel
+    ports:
+      - "8081:5000"
+    env_file:
+      - ../.env
+    networks:
+      - my-network
+networks:
+  my-network:
+    driver: bridge

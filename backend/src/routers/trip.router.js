@@ -66,6 +66,185 @@ router.put(
   })
 );
 
+/**
+ * @swagger
+ * tags:
+ *   name: Group Travel
+ *   description: Endpoints para la gestión de viajes en grupo
+ *   x-order: 2  # Orden 2
+ */
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Trip:
+ *       type: object
+ *       properties:
+ *         _id:
+ *           type: string
+ *         // Agrega aquí las propiedades específicas de tus viajes
+ */
+
+/**
+ * @swagger
+ * /api/trips:
+ *   get:
+ *     tags: [Group Travel]
+ *     summary: Obtener todos los viajes
+ *     responses:
+ *       200:
+ *         description: Lista de todos los viajes
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Trip'
+ */
+
+/**
+ * @swagger
+ * /api/trips/{tripId}:
+ *   get:
+ *     tags: [Group Travel]
+ *     summary: Obtener un viaje por su ID
+ *     parameters:
+ *       - in: path
+ *         name: tripId
+ *         required: true
+ *         description: ID del viaje
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Datos del viaje
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Trip'
+ *       404:
+ *         description: Viaje no encontrado
+ *         content:
+ *           text/plain:
+ *             example: Viaje no encontrado
+ */
+
+/**
+ * @swagger
+ * /api/trips:
+ *   delete:
+ *     tags: [Group Travel]
+ *     summary: Eliminar todos los viajes
+ *     security:
+ *       - BearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Viajes eliminados correctamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Viajes eliminados correctamente
+ */
+
+/**
+ * @swagger
+ * /api/trips/{tripId}:
+ *   delete:
+ *     tags: [Group Travel]
+ *     summary: Eliminar un viaje por su ID
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: tripId
+ *         required: true
+ *         description: ID del viaje
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Viaje eliminado correctamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Viaje eliminado correctamente
+ *       404:
+ *         description: Viaje no encontrado
+ *         content:
+ *           text/plain:
+ *             example: Viaje no encontrado
+ */
+
+/**
+ * @swagger
+ * /api/trips:
+ *   post:
+ *     tags: [Group Travel]
+ *     summary: Crear un nuevo viaje
+ *     security:
+ *       - BearerAuth: []
+ *     requestBody:
+ *       description: Datos del nuevo viaje
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Trip'
+ *     responses:
+ *       200:
+ *         description: Viaje creado exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Trip'
+ */
+
+/**
+ * @swagger
+ * /api/trips/{tripId}:
+ *   put:
+ *     tags: [Group Travel]
+ *     summary: Actualizar información de un viaje por su ID
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: tripId
+ *         required: true
+ *         description: ID del viaje
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       description: Datos actualizados del viaje
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Trip'
+ *     responses:
+ *       200:
+ *         description: Viaje actualizado exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Trip'
+ *       404:
+ *         description: Viaje no encontrado
+ *         content:
+ *           text/plain:
+ *             example: Viaje no encontrado
+ */
+
+
 //busca un libro por su titulo, categoria o autor
 // router.get(
 //   "/search/:searchTerm",

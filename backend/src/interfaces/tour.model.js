@@ -6,7 +6,7 @@ export const TourSchema = new Schema({
     rating: {type: String, required: true},
     days: {type: Number, required: true},
     guide: {type: String, required: true},
-    destination: { type: Schema.Types.ObjectId, ref: 'Destino', required: true },
+    destination: {type:String, required: true },
     images: {type: String, required: true},
 }, {
     timestamps: true,
