@@ -13,12 +13,12 @@ export const getAllDestinations = async () => {
 
 
 
-export const getTourDetails = (tourId) => {
-  const tour = toursData.find((tour) => tour.id === Number(tourId));
-
-  if (!tour) {
-    throw new Error(`Tour con ID ${tourId} no encontrado`);
+export const getTourDetails = async (tourId) => {
+  try {
+    const response = await axios.get(`/api/tours/${tourId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error al obtener detalles del tour:', error.response);
+    throw error;
   }
-
-  return tour;
-}
+};

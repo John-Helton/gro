@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import RatingStars from "react-rating-stars-component";
 import { getAllTours } from "../../services/TursServices";
 import { Link } from "react-router-dom";
- // Ajusta la ruta según tu estructura
 
 export default function ToursAll() {
   const [tours, setTours] = useState([]);
@@ -18,8 +17,12 @@ export default function ToursAll() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const toursData = await getAllTours();
-      setTours(toursData);
+      try {
+        const toursData = await getAllTours();
+        setTours(toursData);
+      } catch (error) {
+        console.error("Error al obtener tours:", error);
+      }
     };
 
     fetchData();
@@ -43,7 +46,7 @@ export default function ToursAll() {
                   }}
                 >
                   <img
-                    src={tour.images[currentImageIndex]}
+                    src={tour.images}
                     alt={tour.name}
                     style={{
                       width: "100%",
@@ -52,33 +55,10 @@ export default function ToursAll() {
                       opacity: "1",
                     }}
                   />
-                  <div
-                    style={{
-                      position: "absolute",
-                      top: "10px",
-                      left: "10px",
-                      backgroundColor: "rgba(0, 0, 0, 0.5)",
-                      color: "white",
-                      padding: "5px",
-                      transition: "opacity 0.5s",
-                      fontWeight: "bold",
-                    }}
-                  >
+                  <div className="tour-price-overlay">
                     {tour.price} USD
                   </div>
-                  <div
-                    style={{
-                      position: "absolute",
-                      bottom: "10px",
-                      left: "10px",
-                      backgroundColor: "rgba(0, 0, 0, 0.5)",
-                      color: "white",
-                      padding: "5px",
-                      transition: "opacity 0.5s",
-                      fontWeight: "700",
-                      fontSize: "1.2rem",
-                    }}
-                  >
+                  <div className="tour-name-overlay">
                     {tour.name}
                   </div>
                 </div>
@@ -86,14 +66,14 @@ export default function ToursAll() {
                   <div style={{ margin: "auto", display: "table" }}>
                     <RatingStars
                       count={5}
-                      value={tour.rating}
+                      value={parseFloat(tour.rating)}
                       edit={false}
                       size={24}
                       activeColor="#ffd700"
                     />
                   </div>
-                  <p className="card-text">Duracion: {tour.days} days</p>
-                  <p className="card-text">Guia: {tour.guide}</p>
+                  <p className="card-text">Duración: {tour.days} días</p>
+                  <p className="card-text">Guía: {tour.guide}</p>
                 </div>
               </div>
             </Link>
