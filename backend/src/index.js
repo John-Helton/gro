@@ -16,8 +16,8 @@ import path from "path";
 import { fileURLToPath } from "url";
 connectDB();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+//const __filename = fileURLToPath(import.meta.url);
+//const __dirname = path.dirname(__filename);
 
 
 const swaggerSpec = {
@@ -45,16 +45,16 @@ app.use("/api/users", userRouter);
 app.use("/api/destinos", destinosRouter);
 app.use("/api/tours", tourRouter);
 
-const publicFolder = path.join(__dirname, "public");
+/*const publicFolder = path.join(__dirname, "public");
 app.use(express.static(publicFolder));
 
 app.get('*', (req, res) => {
   const indexFilePath = path.join(publicFolder, 'index.html');
   res.sendFile(indexFilePath);
-});
+});*/
 
 
-app.use("/doc", swggerUi.serve, swggerUi.setup(swaggerJSDoc(swaggerSpec)));
+app.use("/", swggerUi.serve, swggerUi.setup(swaggerJSDoc(swaggerSpec)));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () =>
