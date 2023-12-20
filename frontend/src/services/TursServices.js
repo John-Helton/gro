@@ -1,13 +1,17 @@
 import { toursData } from "./data";
-import { destinationsData } from "./data";
+import axios from "axios";
 
-export const getAllTours = () => {
-  return toursData;
-}
+export const getAllTours = async () => {
+  const {data} = await axios.get('/api/tours/');
+  return data;
+};
 
-export const getAllDestinations = () => {
-  return destinationsData;
-}
+export const getAllDestinations = async () => {
+  const {data} = await axios.get('/api/destinos/');
+  return data;
+};
+
+
 
 export const getTourDetails = (tourId) => {
   const tour = toursData.find((tour) => tour.id === Number(tourId));

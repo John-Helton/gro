@@ -1,103 +1,72 @@
 import React, { useState, useEffect } from 'react';
-import { getAllDestinations, getAllTours } from '../../services/TursServices';
+import { getAllDestinations } from '../../services/TursServices';
 import { Link } from 'react-router-dom';
 
-
 export default function PopularDestination() {
-    const [destinations, setDestinations] = useState([]);
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [destinations, setDestinations] = useState([]);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const dataDestinations = await getAllDestinations();
-            const dataTours = await getAllTours();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const dataDestinations = await getAllDestinations();
 
-            // Asociar tours a destinos en destinationsData
-            dataTours.forEach(tour => {
-                const destination = dataDestinations.find(dest => dest.name.toLowerCase() === tour.destination.toLowerCase());
-                if (destination) {
-                    destination.tours.push(tour);
-                }
-            });
+        // Aquí puedes realizar cualquier procesamiento adicional con los destinos obtenidos
+        // Por ejemplo, asociar tours a destinos
 
-            // Guardar datos en el estado
-            setDestinations(dataDestinations);
-        };
+        // Guardar datos en el estado
+        setDestinations(dataDestinations);
+      } catch (error) {
+        // Manejo de errores
+        console.error('Error al obtener destinos', error);
+      }
+    };
 
-        fetchData(); // Llamada a fetchData solo una vez al montar el componente
-    }, []); // Dependencias vacías para asegurar que solo se ejecute una vez
+    fetchData(); // Llamada a fetchData solo una vez al montar el componente
+  }, []); // Dependencias vacías para asegurar que solo se ejecute una vez
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentImageIndex((prevIndex) => (prevIndex + 1) % 2);
-        }, 6000);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % 2);
+    }, 6000);
 
-        return () => clearInterval(interval);
-    }, []);
+    return () => clearInterval(interval);
+  }, []);
 
-    // Ordenar los destinos por la cantidad de tours de manera descendente
-    const sortedDestinations = [...destinations].sort((a, b) => b.tours.length - a.tours.length);
+  // Ordenar los destinos por la cantidad de tours de manera descendente
+  const sortedDestinations = [...destinations].sort((a, b) => (b.tours?.length || 0) - (a.tours?.length || 0));
 
-    return (
-        <div className='container mt-5'>
-            <h2 className='text-uppercase text-center'>Destinos Populares en Ecuador</h2>
-            <div className='row'>
-                {sortedDestinations.map((destination) => (
-                    <div key={destination.name} className='col-md-6 col-lg-4 mb-4'>
-                        <div className='card'>
-                            <Link to={`/destination/${destination.id}`}>
-                                {/* Contenido del destino */}
-                                <div
-                                    className='card-img-top'
-                                    style={{
-                                        position: 'relative',
-                                        width: '100%',
-                                        height: '300px',
-                                        overflow: 'hidden',
-                                        transition: 'opacity 0.5s',
-                                    }}
-                                >
-                                    <img
-                                        src={destination.images[currentImageIndex]}
-                                        alt={destination.name}
-                                        style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: '1' }}
-                                    />
-                                    <div
-                                        style={{
-                                            position: 'absolute',
-                                            top: '10px',
-                                            left: '10px',
-                                            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                                            color: 'white',
-                                            padding: '5px',
-                                            transition: 'opacity 0.5s',
-                                            fontWeight: 'bold',
-                                        }}
-                                    >
-                                        {destination.tours.length} tours
-                                    </div>
-                                    <div
-                                        style={{
-                                            position: 'absolute',
-                                            bottom: '10px',
-                                            left: '10px',
-                                            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                                            color: 'white',
-                                            padding: '5px',
-                                            transition: 'opacity 0.5s',
-                                            fontWeight: '700',
-                                            fontSize: '1.2rem',
-                                        }}
-                                    >
-                                        {destination.name}
-                                    </div>
-                                </div>
-                            </Link>
-                        </div>
-                    </div>
-                ))}
+  return (
+    <div className='container mt-5'>
+      <h2 className='text-uppercase text-center'>Destinos Populares en Ecuador</h2>
+      <div className='row'>
+        {sortedDestinations.map((destination) => (
+          <div key={destination.id} className='col-md-6 col-lg-4 mb-4'>
+            <div className='card'>
+              <Link to={`/destination/${destination.id}`}>
+                {/* Contenido del destino */}
+                <div
+                  className='card-img-top'
+                  style={{
+                    position: 'relative',
+                    width: '100%',
+                    height: '300px',
+                    overflow: 'hidden',
+                    transition: 'opacity 0.5s',
+                  }}
+                >
+                  <img
+                    src={destination.images}
+                    alt={destination.name}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: '1' }}
+                  />
+                  {/* Resto del contenido del destino... */}
+                </div>
+              </Link>
             </div>
-        </div>
-    );
-    
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }

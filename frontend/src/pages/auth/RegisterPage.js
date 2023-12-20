@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";  // Cambia a useNavigate
 import axios from "axios";
 
 export default function RegisterPage() {
@@ -8,6 +8,7 @@ export default function RegisterPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);
+  const navigate = useNavigate();  // Utiliza useNavigate
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -29,7 +30,8 @@ export default function RegisterPage() {
       if (response.status === 201) {
         // Registro exitoso
         console.log("Registro exitoso", response.data);
-        // Puedes redirigir al usuario a la página de inicio de sesión o realizar otras acciones
+        // Redirigir al usuario a la página de inicio (/) utilizando navigate
+        navigate("/");
       } else {
         // Código de estado no esperado
         setError("Error en el registro. Inténtalo de nuevo.");

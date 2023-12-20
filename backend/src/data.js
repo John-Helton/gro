@@ -22,5 +22,23 @@ export const data_users = [
     isAdmin: true,
     rol: ["admin", "user"],
   }
-
 ]
+
+export const dataTour_GroupTravel = [
+  {
+    name: "Tour1",
+    price: 100,
+    rating: "4.5",
+    days: 5,
+    guide: "carlos",
+    destination: "quito",
+    images: "sknfjasndkasnm",
+  },
+];
+export const dataDestino_GroupTravel = [
+  {
+    name:"Quito",
+    tours:"tour1",
+    images:"sjdasd",
+  },
+];

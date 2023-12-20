@@ -51,7 +51,7 @@ export default function PopularTours() {
                   }}
                 >
                   <img
-                    src={tour.images[currentImageIndex]}
+                    src={tour.images}
                     alt={tour.name}
                     style={{
                       width: "100%",
@@ -94,7 +94,7 @@ export default function PopularTours() {
                   <div style={{ margin: "auto", display: "table" }}>
                     <RatingStars
                       count={5}
-                      value={tour.rating}
+                      value={parseFloat(tour.rating)}
                       edit={false}
                       size={24}
                       activeColor="#ffd700"

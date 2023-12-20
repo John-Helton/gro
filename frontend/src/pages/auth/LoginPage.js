@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Importa useNavigate para la navegación
+import { useNavigate } from "react-router-dom";
 import { login } from "../../services/UserService";
+import Swal from "sweetalert2";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
 
-  const navigate = useNavigate(); // Hook de React Router para navegación
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -15,11 +15,25 @@ export default function LoginPage() {
       const user = await login(email, password);
       console.log(user);
 
-      // Redirigir al usuario a la página de inicio y mostrar mensaje
+      // Mostrar alerta de éxito
+      Swal.fire({
+        icon: "success",
+        title: "Inicio de sesión exitoso",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
+      // Redirigir al usuario a la página de inicio
       navigate("/", { state: { message: "Inicio de sesión exitoso" } });
     } catch (error) {
       console.log(error);
-      setError("Credenciales incorrectas");
+
+      // Mostrar alerta de error
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Credenciales incorrectas",
+      });
     }
   };
 
@@ -55,7 +69,6 @@ export default function LoginPage() {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              {error && <div className="alert alert-danger">{error}</div>}
               <button type="submit" className="btn btn-primary">
                 Iniciar Sesión
               </button>
